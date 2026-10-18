@@ -14,8 +14,8 @@ int main() {
 int calculateTax() {
     float amount = 0.0f;
     printf("Enter a dollar and cents amount: ");
-    scanf("%f", &amount); // Read the user input for the amount
-    printf("Your amount with 5 percent tax added is: $%.2f\n", amount * 1.05);
+    scanf("%.2f", &amount); // Read the user input for the amount
+    printf("Your amount with 5 percent tax added is: $%.2f\n", amount * 1.05f);
     return 0;
 }
 
@@ -32,5 +32,34 @@ int calculatePolynomial(){
 }
 
 //Chapter 3: Q 3
+/*Books are identified by an International Standard Book Number (ISBN). 
+ISBNs assigned after January 1, 2007 contains 13 digits, arranged in five groups
+such as 978-0-393-97950-3. (Older ISBNs use 10 digits.) The first group
+(the GSI prefix) is currently either 978 or 979. Th egroup identifier specifies
+the ... Blah blah blah. Write a program that breaks down an ISBN entered by the user*/
+
+int isbnBreakdown(){
+    char isbn[] = {0};
+    int GSI_prefix[], group_identifier[], publisher_code[], item_number[], check_diget[] = {0};
+    printf("Enter an ISBN number: ");
+    scanf("%s", isbn); // Read the user input for ISBN
+
+    //need to somehow splice the digits per dash and print the specific stuff attached idk
+
+    for (i=0; i<sizeof(isbn); ++i){
+        int part = 0
+        int array_part = 0
+        if (isbn[i] == '-'){
+            part+1
+            array_part = 0
+        }
+        else if(part == 0){
+            GSI_prefix[array_part]= isbn[i];
+            array_part+1
+        }
+    }
+
+}
+
 
 //Chapter 3: Q 4
