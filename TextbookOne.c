@@ -114,9 +114,8 @@ void telephoneNumber(){
 
         if (phone[phoneIndex] == '(' || phone[phoneIndex] == ')' || phone[phoneIndex] == ' ' || phone[phoneIndex] == '-') {
             if (phoneIndex == 4 || phoneIndex == 9) {
-                partIndex++; // Move to the next part after the closing parenthesis
+                partIndex++;
             }
-            // Skip these characters
             phoneIndex++;
             continue;
         }
@@ -136,15 +135,17 @@ void telephoneNumber(){
     printf("The telephone number in the form xxx.xxx.xxxx is: %s.%s.%s", first_half, second_half, third_half);
 }
 
+
 void assignmentOne() {
     printf("Assignment One is running\n");
-    calculateTax(); // Call the function to calculate tax
-    calculatePolynomial(); // Call the function to calculate polynomial
-    isbnBreakdown(); // Call the function to break down ISBN
-    telephoneNumber(); // Call the function to format telephone number
+    calculateTax();
+    calculatePolynomial(); 
+    isbnBreakdown();
+    telephoneNumber(); 
 }
 
 int main() {
+    printf("Assignment One is running\n");
     assignmentOne(); // Call the assignmentOne function to execute the program
     return 0;
 }
