@@ -4,44 +4,46 @@
 to enter two integers , then calculates
 and displays their greatest common divisor*/
 
-void calculateGCD(){
-    int A, B;
-    printf("Enter two positive integers (put a space between the two values): ");
-    scanf("%d %d", &A, &B);
+int calculateGCD(int m ,int n){
+    // printf("Enter two positive integers (put a space between the two values): ");
+    // scanf("%d %d", &m, &n);
 
     // Calculate GCD using Euclidean algorithm
+    //If n is 0, quit loop, m is GCD
+    //Remainder when m/n...
+    //n is m and remainder is n
+    //repeat until n is zero.
 
-   if (A == 0){
-    printf("The GCD is $d\n", B );
-   }
-   else if (B == 0){
-    printf("The GCD is $d\n", A);
-   }
-   else{
-    //divide the A and B to get a number and remainder...
-    //Then we find the GCD of B and the remainder...
-    //A is now B and B is now the remainder...
-    //We continue the loop until we return to either B or A being 0,
-    //then the non zero integer is the answer.
-
-    while (A != 0 || B != 0){
-        int R = A%B;
-        A = A/B;
-        B = R;
-    }
-    if (A == 0){
-        printf("The GCD is %d\n", B);
-    }
-    else if (B == 0){
-        printf("The GCD is %d\n", A);
-    }
-   }
-
-}
+    while (n!= 0){
+        int remainder = m%n;
+        m = n;
+        n = remainder;  
+    };
+    printf("The GCD is %d\n", m);
+    return m;
+};
 
 //Chapter 6: Q3
+//reduce fraction to lowest terms
+
+void reduceFraction(){
+    int numerator, denominator;
+    printf("Enter a fraction!");
+    scanf("%d/%d", &numerator, & denominator);
+    int GCD = calculateGCD(numerator, denominator);
+    printf("Your reduced fraction is %d/%d", numerator/GCD, denominator/GCD);
+};
+
 
 //Chapter 7: Q4
+//convert alphabetic phone number into numeric form
+
+void phoneNumberConversion(){
+    char phoneLetters[11] = "XXXXXXXXXX";
+    //2 = ABC, 3 = DEF, 4 GHI, 5 JKL, 6 MNO, 7 PRS, 8 TUV, 9 WXY
+    printf("Enter phone letters: ");
+    scanf("%c", &phoneLetters);
+};
 
 //Chapter 7: Q5
 
@@ -50,6 +52,19 @@ void calculateGCD(){
 
 
 int main() {
-    calculateGCD()
+    //Chapter 6: Q2
+    int m,n;
+    printf("Enter two positive integers (put a space between the two values): ");
+    scanf("%d %d", &m, &n);
+    calculateGCD(m, n);
+
+    //Chapter 6: Q3
+    reduceFraction();
+
+    //Chapter 7: Q4
+
+    //Chapter 7: Q5
+
+
     return 0;
 }
