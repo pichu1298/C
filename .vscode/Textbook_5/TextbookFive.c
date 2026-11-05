@@ -70,9 +70,33 @@ void problem_three(void){
 //Chapter 11: Q1
 //modify programming project 7 from Chapter 2 so that it includes the following function:
 void pay_amount(int dollars, int *twenties, int *tens, int *fives, int *ones){
+    *twenties = dollars / 20;
+    dollars %= 20;
 
+    *tens = dollars / 10;
+    dollars %= 10;
+
+    *fives = dollars / 5;
+    *ones = dollars % 5;
 }
 
+void payment(void){
+    int dollars;
+    int twenties, tens, fives, ones;
+
+    printf("Enter a dollar amount: ");
+    if (scanf("%d", &dollars) != 1 || dollars < 0) {
+        printf("Please enter a nonnegative whole-dollar amount.\n");
+        return;
+    }
+
+    pay_amount(dollars, &twenties, &tens, &fives, &ones);
+
+    printf("$20 bills: %d\n", twenties);
+    printf("$10 bills: %d\n", tens);
+    printf(" $5 bills: %d\n", fives);
+    printf(" $1 bills: %d\n", ones);
+}
 
 
 //Chapter 12: Q2
@@ -126,6 +150,7 @@ int main(void) {
     //problem_one();
     //problem_two();
     //problem_three();
-    chapter_twelve();
+    payment();
+    //chapter_twelve();
     return 0;
 }
