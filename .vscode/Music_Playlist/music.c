@@ -27,18 +27,23 @@ struct MusicNode *add_to_playlist(struct MusicNode *list, char title[], char art
 
 struct MusicNode *display_playlist(struct MusicNode *list){
     printf("Playlist:\n");
+    int count = 0;
     while (list != NULL){
-        printf("%s - %s (%d)\n", list->title, list->artist, list->year);
+        printf("%d. %s - %s (%d)\n", ++count, list->title, list->artist, list->year);
         list = list->next_ptr;
     }
     return list;
 }
 
-struct MusicNode *remove_from_playlist(struct MusicNode *list, char title[]){
+
+
+struct MusicNode *remove_from_playlist(struct MusicNode *list, char title[], char artist[], int year){
     struct MusicNode *current = list;
     struct MusicNode *prev = NULL;
     while (current != NULL){
-        if (strcmp(current->title, title) == 0){
+        if (strcmp(current->title, title) == 0 &&
+            strcmp(current->artist, artist) == 0 &&
+            current->year == year){
             if (prev == NULL){
                 list = current->next_ptr;
             } else {
@@ -50,19 +55,27 @@ struct MusicNode *remove_from_playlist(struct MusicNode *list, char title[]){
         prev = current;
         current = current->next_ptr;
     }
-    printf("Song not found in playlist.\n");
     return list;
 }
 
 
 void chooseSelection(struct MusicNode **playlist){
-    printf("Do you want to: \n"
-           "1. add to playlist\n"
-           "2. remove from playlist\n"
-           "3. display playlist\n"
+    printf("\nDo you want to: \n"
+           "1. add to playlist\n");
+    //choice 2 should only be shown if the playlist has actual songs
+    if (*playlist != NULL){
+        printf("2. remove from playlist\n");
+    }
+    printf("3. display playlist\n"
            "4. quit\n");
+        //choice 2 should only be shown if the playlist has actual songs
+
     int choice;
     scanf("%d", &choice);
+    if (choice == 2 && *playlist == NULL){
+        printf("Invalid choice.\n");
+        return;
+    }
     switch(choice){
         case 1:
             // Add to playlist
@@ -93,11 +106,35 @@ void chooseSelection(struct MusicNode **playlist){
             break;
         case 2:
             //Remove from playlist
+            printf("You are removing a song from the playlist.\n");
             char title_to_remove[20];
+            char artist_to_remove[20];
+            int year_to_remove;
             printf("Enter title: ");
             scanf("%s", title_to_remove);
+            printf("Enter artist: ");
+            scanf("%s", artist_to_remove);
+            printf("Enter year: ");
+            scanf("%d", &year_to_remove);
+
+            //check if the song exists in the playlist
+            struct MusicNode *current_for_removal = *playlist;
+            while (current_for_removal != NULL){
+                if (strcmp(current_for_removal->title, title_to_remove) == 0 &&
+                    strcmp(current_for_removal->artist, artist_to_remove) == 0 &&
+                    current_for_removal->year == year_to_remove){
+                    break;
+                }
+                current_for_removal = current_for_removal->next_ptr;
+            }
+
+            if (current_for_removal == NULL){
+                printf("Song not found in playlist.\n");
+                break;
+            }
+
             printf("Removing from playlist...\n");
-            *playlist = remove_from_playlist(*playlist, title_to_remove);
+            *playlist = remove_from_playlist(*playlist, title_to_remove, artist_to_remove, year_to_remove);
             break;
         case 3:
             // Display playlist
