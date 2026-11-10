@@ -75,9 +75,21 @@ void chooseSelection(struct MusicNode **playlist){
             scanf("%s", artist);
             printf("Enter year: ");
             scanf("%d", &year);
-            printf("Adding to playlist...\n");
-
-            *playlist = add_to_playlist(*playlist, title, artist, year);
+            //check if it there is an exact duplicate
+            struct MusicNode *current = *playlist;
+            while (current != NULL){
+                if (strcmp(current->title, title) == 0 &&
+                    strcmp(current->artist, artist) == 0 &&
+                    current->year == year){
+                    printf("Song already exists in playlist.\n");
+                    break;
+                }
+                current = current->next_ptr;
+            }
+            if (current == NULL){
+                printf("Adding to playlist...\n");
+                *playlist = add_to_playlist(*playlist, title, artist, year);
+            }
             break;
         case 2:
             //Remove from playlist
