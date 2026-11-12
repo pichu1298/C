@@ -35,8 +35,6 @@ struct MusicNode *display_playlist(struct MusicNode *list){
     return list;
 }
 
-
-
 struct MusicNode *remove_from_playlist(struct MusicNode *list, char title[], char artist[], int year){
     struct MusicNode *current = list;
     struct MusicNode *prev = NULL;
@@ -87,7 +85,13 @@ void chooseSelection(struct MusicNode **playlist){
             printf("Enter artist: ");
             scanf("%s", artist);
             printf("Enter year: ");
-            scanf("%d", &year);
+            fflush(stdout);
+            
+            //keep prompting until the user enters a valid number
+            while (scanf("%d", &year) != 1){
+                printf("\nPlease enter a number: ");
+                while (getchar() != '\n');
+            }
             //check if it there is an exact duplicate
             struct MusicNode *current = *playlist;
             while (current != NULL){
@@ -115,7 +119,13 @@ void chooseSelection(struct MusicNode **playlist){
             printf("Enter artist: ");
             scanf("%s", artist_to_remove);
             printf("Enter year: ");
-            scanf("%d", &year_to_remove);
+            fflush(stdout);
+
+            //keep prompting until the user enters a valid number
+            while (scanf("%d", &year_to_remove) != 1){
+                printf("\nPlease enter a number: ");
+                while (getchar() != '\n');
+            }
 
             //check if the song exists in the playlist
             struct MusicNode *current_for_removal = *playlist;
