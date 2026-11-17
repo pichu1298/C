@@ -16,23 +16,24 @@ void app_main(void){
     gpio_set_direction(YELLOW_LIGHT_PIN, GPIO_MODE_OUTPUT);
     gpio_set_direction(GREEN_LIGHT_PIN, GPIO_MODE_OUTPUT);
 
-    while (1){
-        vTaskDelay(pdMS_TO_TICKS(1000));
-    gpio_set_level(RED_LIGHT_PIN, 1);
-    vTaskDelay(pdMS_TO_TICKS(1000));
 
-    gpio_set_level(RED_LIGHT_PIN, 0);
-    gpio_set_level(YELLOW_LIGHT_PIN, 1);
-    vTaskDelay(pdMS_TO_TICKS(1000));
-
-    gpio_set_level(YELLOW_LIGHT_PIN, 0);
-    gpio_set_level(GREEN_LIGHT_PIN, 1);
-    vTaskDelay(pdMS_TO_TICKS(1000));
-
-    gpio_set_level(GREEN_LIGHT_PIN, 0);}
     gpio_set_level(RED_LIGHT_PIN, 0);
     gpio_set_level(YELLOW_LIGHT_PIN, 0);
     gpio_set_level(GREEN_LIGHT_PIN, 0);
 
+    while (1){
+        gpio_set_level(RED_LIGHT_PIN, 1);
+        vTaskDelay(pdMS_TO_TICKS(1000));
+
+        gpio_set_level(RED_LIGHT_PIN, 0);
+        gpio_set_level(YELLOW_LIGHT_PIN, 1);
+        vTaskDelay(pdMS_TO_TICKS(1000));
+
+        gpio_set_level(YELLOW_LIGHT_PIN, 0);
+        gpio_set_level(GREEN_LIGHT_PIN, 1);
+        vTaskDelay(pdMS_TO_TICKS(3000));
+
+        gpio_set_level(GREEN_LIGHT_PIN, 0);
+    }
     
 }
