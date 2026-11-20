@@ -56,7 +56,6 @@ struct MusicNode *remove_from_playlist(struct MusicNode *list, char title[], cha
     return list;
 }
 
-
 void chooseSelection(struct MusicNode **playlist){
     printf("\nDo you want to: \n"
            "1. add to playlist\n");
@@ -158,10 +157,6 @@ void chooseSelection(struct MusicNode **playlist){
             break;
     }
 }
-
-
-
-
 
 int main(){
     struct MusicNode *playlist = NULL;
